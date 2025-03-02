@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskCurator.EditTask"
+             Title="Task Editor">
+    
+    <ScrollView VerticalOptions = "FillAndExpand">
+
+        <VerticalStackLayout
+            Padding = "30,0"
+            Spacing = "25"
+            HorizontalOptions = "FillAndExpand">
+
+            <Label 
+                Text = "{Binding Name, StringFormat ='Edit Task: {0}'}"
+                FontSize = "Title"
+                HorizontalOptions = "Center" 
+                Padding = "10"/>
+            
+            <Grid Margin="10"
+                  RowSpacing="10"
+                  ColumnSpacing="10"
+                  RowDefinitions="Auto, *, Auto"
+                  ColumnDefinitions="75, *"
+                  HorizontalOptions="FillAndExpand">
+
+                <Label 
+                    Text = "Name: " 
+                    Grid.Row = "0"
+                    Grid.Column ="0"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"/>
+
+                <Entry
+                    x:Name = "TaskNameEntry"
+                    Placeholder = "Enter a task name"
+                    HorizontalOptions = "Fill"
+                    Text = "{Binding Name}"
+                    MaxLength = "50"
+                    Grid.Row = "0"
+                    Grid.Column ="1"/>
+
+                <VerticalStackLayout
+                    Grid.Row = "1"
+                    Grid.Column = "0">
+
+                    <Label Text = "Description"
+                        HorizontalOptions="End"/>
+
+                    <Label Text = "(optional):"
+                        HorizontalOptions="End"/>
+
+                </VerticalStackLayout>
+
+                <Entry
+                    x:Name = "TaskDescEntry"
+                    Placeholder = "Enter a description"
+                    HorizontalOptions = "Fill"
+                    Text = "{Binding Description}"
+                    MaxLength = "200"
+                    Grid.Row = "1"
+                    Grid.Column ="1"/>
+
+                <VerticalStackLayout Spacing="40"
+                                     Grid.Row = "2"
+                                    Grid.Column ="0">
+
+                    <Label 
+                        Text= "Starts: " 
+                        HorizontalOptions="End"
+                        VerticalOptions="Center" />
+                    
+                    <Label 
+                        Text= "Due:" 
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"/>
+
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="10"
+                                     Grid.Row = "2"
+                                     Grid.Column ="1">
+                    <HorizontalStackLayout Spacing="20">
+                        
+                        <TimePicker 
+                            x:Name = "StartTimePicker"
+                            Time = "{Binding StartDT.TimeOfDay}" />
+                        
+                        <DatePicker 
+                            x:Name = "StartDatePicker"
+                            MinimumDate = "01/01/2000"
+                            MaximumDate = "12/31/9999"
+                            Date = "{Binding StartDT.Date}" />
+
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing = "20">
+
+                        <TimePicker 
+                            x:Name = "DueTimePicker"
+                            Time = "{Binding EndDT.TimeOfDay}" />
+
+                        <DatePicker 
+                            x:Name = "DueDatePicker"
+                            MinimumDate = "01/01/2000"
+                            MaximumDate = "12/31/9999"
+                            Date = "{Binding EndDT.Date}" />
+
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid Margin="10"
+                  RowSpacing="20"
+                  ColumnSpacing="10"
+                  RowDefinitions="Auto, *, Auto"
+                  ColumnDefinitions="Auto, Auto"
+                  HorizontalOptions="Center">
+                
+                <StackLayout 
+                    RadioButtonGroup.GroupName = "PriorityLv" 
+                    Grid.Row="0"
+                    Grid.Column="0">
+                    
+                    <Label Text = "Priority level: " />
+                    
+                    <RadioButton x:Name = "HighPriorityRadio" Content = "High"
+                                 WidthRequest="100"/>
+                    
+                    <RadioButton x:Name = "MediumPriorityRadio" Content = "Medium" 
+                                 WidthRequest="100"/>
+                    
+                    <RadioButton x:Name = "LowPriorityRadio" Content = "Low" 
+                                 WidthRequest="100"/>
+                
+                </StackLayout>
+
+                <Frame
+                    BorderColor="Black"
+                    WidthRequest="128"
+                    HeightRequest="128"
+                    Padding="0"
+                    CornerRadius="14"
+                    Grid.Row="0"
+                    Grid.Column="1">
+                    
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="AddImageFrame_Tapped"/>
+                    </Frame.GestureRecognizers>
+                    
+                    <AbsoluteLayout>
+                        
+                        <Label
+                            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                            AbsoluteLayout.LayoutFlags="All"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            FontAttributes="Bold"
+                            Text="Tap here to add image (optional)"
+                            TextColor="Black"/>
+                        
+                        <Image
+                            x:Name="TaskImage"
+                            Source="{Binding ImageSource}"
+                            Aspect="AspectFill"
+                            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                            AbsoluteLayout.LayoutFlags="All"/>
+                        
+                    </AbsoluteLayout>
+                </Frame>
+
+                <HorizontalStackLayout Spacing = "20"
+                                       Grid.Row="1">
+                    <Label 
+                        Text = "Reminders?" 
+                        VerticalOptions="Center"/>
+
+                    <CheckBox
+                        x:Name = "RemindersChB"/>
+
+                </HorizontalStackLayout>
+
+                <Button
+                    x:Name = "UpdateTask"
+                    Text = "Update"
+                    Clicked="OnUpdateTaskClicked" 
+                    Grid.Row="2"/>
+            </Grid>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

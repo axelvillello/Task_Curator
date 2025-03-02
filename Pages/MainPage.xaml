@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskCurator.MainPage">
+
+    <Grid Margin = "20" 
+          RowDefinitions = "Auto,*,Auto">
+
+        <Label
+        Text = "Which Tasks to Curate?"
+        HorizontalOptions = "Center"
+        FontAttributes = "Bold"
+        FontSize = "Title"
+        Padding = "10"/>
+
+        <BoxView    
+            HeightRequest="1"
+            BackgroundColor="White"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End"
+            Margin="10"/>
+        
+        <ScrollView Grid.Row = "1"
+            VerticalOptions = "FillAndExpand">
+            <VerticalStackLayout Padding = "10"
+                                 Spacing = "25">
+            
+                <VerticalStackLayout BindableLayout.ItemsSource = "{Binding GroupList}" 
+                                     Padding = "20,0"
+                                     Spacing = "25">
+
+                    <BindableLayout.EmptyView>
+                        <StackLayout>
+                            <Label
+                                    x:Name = "MainScrDialog"
+                                    Text = "Create a grouping for tasks to start!"
+                                    HorizontalOptions = "Center"
+                                    FontSize = "Medium"
+                                    TextColor="Grey"
+                                    Padding="50"/>
+
+                        </StackLayout>
+                    </BindableLayout.EmptyView>
+
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+
+                            <Border
+                                Stroke = "White"
+                                StrokeThickness = "2"
+                                Background = "Black"
+                                Padding = "8"
+                                Margin = "0, 2"
+                                StrokeShape = "RoundRectangle 10,10,10,10">
+
+                                <VerticalStackLayout>
+
+                                    <VerticalStackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped = "OnTap" />
+                                        <SwipeGestureRecognizer Direction = "Left" Swiped="OnLeftSwipe"/>
+                                    </VerticalStackLayout.GestureRecognizers>
+
+                                    <Label Text = "{Binding Name}"
+                                       FontAttributes="Bold"
+                                       TextColor = "White"
+                                       FontSize = "Medium"/>
+
+                                    <Label Text = "{Binding Description}"/>
+
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+                
+                <Label Text="SWIPE LEFT to delete a group"
+                       HorizontalOptions="End"
+                       TextDecorations="Underline"/>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+        
+        <Button
+            Grid.Row = "2"
+            x:Name = "AddTaskGroup"
+            Text = "+"
+            FontSize = "Large"
+            Background = "White"
+            Padding = "30, 2"
+            CharacterSpacing = "25"
+            Margin = "0, 2"
+            Clicked = "OnAddTaskGroupClicked"
+            BorderWidth = "3"/>
+        
+    </Grid>
+</ContentPage>

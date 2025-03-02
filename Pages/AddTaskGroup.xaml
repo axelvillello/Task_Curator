@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskCurator.AddTaskGroup"
+             Title="Task Group Creator">
+    
+    <VerticalStackLayout
+        Padding = "30,0"
+        Spacing = "25"
+        HorizontalOptions = "Center">
+        
+        <Label 
+            Text = "Create a new group!"
+            FontSize = "Title"
+            HorizontalOptions = "Center" />
+
+        <Grid Margin = "20" 
+            RowDefinitions = "Auto,*,Auto"
+            ColumnDefinitions="Auto, *"
+            RowSpacing = "20"
+            ColumnSpacing = "20">
+
+            <Label 
+                Text = "Name: " 
+                Grid.Row = "0"
+                Grid.Column = "0"
+                HorizontalOptions = "End"/>
+            
+            <Entry
+                x:Name = "GroupNameEntry"
+                Placeholder = "Enter a name here"
+                HorizontalOptions = "Fill" 
+                Grid.Row = "0"
+                Grid.Column = "1"/>
+            
+            <VerticalStackLayout
+                Grid.Row = "1"
+                Grid.Column = "0">
+                
+                <Label Text = "Description"
+                       HorizontalOptions="End"/>
+                
+                <Label Text = "(optional):"
+                       HorizontalOptions="End"/>
+                
+            </VerticalStackLayout>
+            
+            <Entry
+                x:Name = "GroupDescEntry"
+                Placeholder = "Enter a description here"
+                HorizontalOptions = "Fill" 
+                Grid.Row = "1"
+                Grid.Column = "1"/>
+
+        </Grid>
+
+        <HorizontalStackLayout Spacing = "5"
+                               HorizontalOptions = "Center">
+
+            <Button
+                x:Name = "CreateGroup"
+                Text = "Create"
+                Clicked = "OnCreateGroupClicked" />
+
+        </HorizontalStackLayout>
+    </VerticalStackLayout>  
+</ContentPage>

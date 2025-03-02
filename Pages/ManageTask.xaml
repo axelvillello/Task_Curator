@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskCurator.ManageTask"
+             Title="Task Options">
+
+    <VerticalStackLayout>
+        
+        <Label 
+            Text = "{Binding Name}"
+            FontSize = "Title"
+            VerticalOptions = "Center" 
+            HorizontalOptions = "Center" 
+            Padding = "20"/>
+        
+        <HorizontalStackLayout              
+            HorizontalOptions = "Center"
+            Spacing = "20">
+
+            <VerticalStackLayout
+                Spacing="20">
+ 
+                <Button
+                    x:Name = "EditTaskBtn" 
+                    Text = "Edit"
+                    Clicked = "OnEditTaskClicked"/>
+
+                <Button
+                    x:Name = "DeleteTaskBtn" 
+                    Text = "Delete" 
+                    Clicked = "OnDeleteTaskClicked"/>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                Spacing="20">
+
+                <Button
+                    x:Name = "CompletedTaskBtn" 
+                    Text = "FINISHED!"
+                    Clicked = "OnCompletedClicked">
+                    
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Completion}" Value="True">
+                            <Setter Property="Text" Value="Restart Task" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                    
+                </Button>
+
+                <Button
+                    x:Name = "DelayTaskBtn" 
+                    Text = "Delay"
+                    Clicked="OnDelayTaskClicked">
+                    
+                </Button>
+
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
