@@ -5,7 +5,7 @@ Task Curator is an Android application created to ensure that your daily tasks a
 
 ## Features
 
-- ***Task Delay***
+- ***Task Delay:***
 With a simple swipe a task can be delayed to fit your everchanging schedule
 - ***Priority Hierachy***
 
